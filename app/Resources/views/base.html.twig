@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}Unsere Hochzeit 2016{% endblock %}</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        {% block stylesheets %}{% endblock %}
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+
+        <!-- WRAPPER -->
+        <div class="fw-site-wrapper">
+            {% block body %}{% endblock %}
+        </div>
+
+        <!-- FOOTER -->
+        <div class="fw-site-footer">
+            <div class="container">
+
+                <div class="pull-left">
+                    &copy; {{ 'now'|date('Y') }}, Florian Weber
+                </div>
+
+                <div class="pull-right">
+                    <a href="https://fweber.info">fweber.info</a>
+                    <a href="https://fweber.info/imprint">Impressum</a>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
