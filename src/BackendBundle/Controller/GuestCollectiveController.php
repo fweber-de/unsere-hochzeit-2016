@@ -28,6 +28,7 @@ class GuestCollectiveController extends Controller
             $gc
                 ->setTitle($request->get('title'))
                 ->setCode(base_convert(time(), 10, 36))
+                ->setIsConfirmed(false)
             ;
 
             $em = $this->getDoctrine()->getManager();
@@ -92,6 +93,7 @@ class GuestCollectiveController extends Controller
             $guest
                 ->setName($request->get('name'))
                 ->setIsGoing(false)
+                ->setIsChildGuest(($request->get('is_child', '') == 'on') ? true : false)
                 ->setCollective($gc)
             ;
 

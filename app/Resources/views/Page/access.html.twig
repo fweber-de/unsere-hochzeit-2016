@@ -1,0 +1,112 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-6">
+
+            <p>
+                <h1>Einladung</h1>
+                Zu unserer Hochzeitsfeier am Samstag 20. August 2016
+            </p>
+
+            <p>
+                <h2>Wo?</h2>
+                Landgasthof & Pension Köhlerhütte<br>
+                Zum Sportplatz 2<br>
+                01108 Dresden, Weixdorf<br>
+            </p>
+
+            <p>
+                <h2>Wann?</h2>
+                20.08.2016, ab 14:00Uhr
+            </p>
+
+            <p>
+                <h2>Was?</h2>
+                Kaffee und Kuchen, nettes Beisammensein & Abendessen.
+            </p>
+
+            <p>
+                <h2>Und sonst so?</h2>
+                Bitte zieht euch so an, wie ihr euch wohlfühlt. Bitte sagt uns Bescheid, ob wir euch helfen sollen die An- und Abfahrt zu organisieren. Bitte schenkt uns keine großen Dinge, wir möchten mit euch eine schöne Zeit haben und wer uns darüber hinnaus etwas Gutes tun möchte, darf das aufgestellte Sprarschwein füttern. Sagt uns bitte bei eurer Antwort auch Bescheid, ob ihr irgendwelche Allergien, Unverträglichkeiten oder Vorlieben beim Essen habt, die wir beachten sollten.
+            </p>
+
+        </div>
+        <div class="col-sm-6">
+
+            <h1>Hallo, {{ gc.title }}!</h1>
+
+            <h3>Geladene Gäste</h3>
+
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Zusage</th>
+                </tr>
+                {% for g in gc.guests %}
+                    <tr>
+                        <td>{{ g.name }}</td>
+                        <td><input class="accept-checkbox" type="checkbox" data-id="{{ g.id }}" checked></td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div class="form-group">
+                <label for="input-comment">Anmerkungen</label>
+                <textarea class="form-control" id="input-comment" rows="8"></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="submit">Zusage absenden</button>
+
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function() {
+
+            var code = '{{ gc.code }}';
+
+            $('#submit').click(function(e) {
+
+                var guestIds = [];
+
+                $('.accept-checkbox').each(function() {
+                    if(this.checked == true) {
+                        guestIds.push($(this).data('id'));
+                    }
+                });
+
+                var data = {
+                    guests: JSON.stringify(guestIds),
+                    comment: ($('#input-comment').val() !== '') ? $('#input-comment').val() : null,
+                    code: code
+                };
+
+                var url = Routing.generate('access_confirm');
+
+                $.post(url, data).success(function(d) {
+                    swal({
+                        title: "Super!",
+                        text: "Danke für deine Zusage :)",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonText: "Fertig",
+                        closeOnConfirm: true
+                    }, function(isConfirm){
+                        if(isConfirm) {
+                            window.location.href = Routing.generate('landing_page');
+                        }
+                    });
+                }).fail(function(error) {
+                    console.log(error);
+                });
+
+            });
+
+        });
+
+    </script>
+
+{% endblock %}

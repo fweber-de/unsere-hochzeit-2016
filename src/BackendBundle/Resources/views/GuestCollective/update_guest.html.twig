@@ -9,6 +9,14 @@
             <input class="form-control" type="text" placeholder="Name" value="{{ g.name }}" name="name">
         </div>
 
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="cb-child" name="is_child"
+                {% if g.isChildGuest %}checked{% endif %}
+                > Is Child?
+            </label>
+        </div>
+
         <input type="hidden" value="1" name="sent">
 
         <button class="btn btn-warning" type="submit">Edit</button>

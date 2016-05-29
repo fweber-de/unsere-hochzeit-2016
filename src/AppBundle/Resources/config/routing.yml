@@ -1,3 +1,13 @@
 landing_page:
     path:       /
     defaults:   { _controller: AppBundle:Page:landing }
+
+access:
+    path:       /access
+    defaults:   { _controller: AppBundle:Page:access }
+    methods:    [POST]
+
+access_confirm:
+    path:       /access/confirm
+    defaults:   { _controller: AppBundle:Page:accessConfirm }
+    methods:    [POST]

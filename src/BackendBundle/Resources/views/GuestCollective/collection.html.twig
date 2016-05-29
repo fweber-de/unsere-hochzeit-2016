@@ -10,11 +10,22 @@
 
     {% if guests|length > 0 %}
 
+        {% set adults = 0 %}
+        {% set children = 0 %}
+        {% set total = 0 %}
+
         <table class="table">
             {% for gc in guests %}
                 <tr class="active">
-                    <td>{{ gc.title }}</td>
+                    <td>
+                        {{ gc.title }}
+                    </td>
                     <td><code>{{ gc.code }}</code></td>
+                    <td>
+                        {% if gc.isConfirmed %}
+                            <span class="label label-success">Confirmed</span>
+                        {% endif %}
+                    </td>
                     <td>
                         <span class="pull-right">
                             <a class="btn btn-success btn-sm" href="{{ path('guest_collective_add_guest', {id: gc.id}) }}">Add</a>
@@ -26,7 +37,12 @@
 
                 {% for g in gc.guests %}
                     <tr>
-                        <td>{{ g.name }}</td>
+                        <td>
+                            {{ g.name }}
+                            {% if g.isChildGuest %}
+                                <small>Child</small>
+                            {% endif %}
+                        </td>
                         <td>
                             {% if g.isGoing %}
                                 <span class="glyphicon glyphicon-ok"></span>
@@ -34,6 +50,7 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             {% endif %}
                         </td>
+                        <td></td>
                         <td>
                             <span class="pull-right">
                                 <a class="btn btn-warning btn-sm" href="{{ path('guest_collective_guest_update', {id: gc.id, gid: g.id}) }}">Edit</a>
@@ -41,9 +58,41 @@
                             </span>
                         </td>
                     </tr>
+
+                    {% if g.isGoing %}
+                        {% if g.isChildGuest %}
+                            {% set children = children + 1 %}
+                        {% else %}
+                            {% set adults = adults + 1 %}
+                        {% endif %}
+
+                        {% set total = total + 1 %}
+                    {% endif %}
                 {% endfor %}
+
+                {% if gc.comment|length > 0 %}
+                    <tr class="warning">
+                        <td>Comment:</td>
+                        <td colspan="3">
+                            {{ gc.comment }}
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </table>
+
+        <div class="well well-sm">
+            <h2>Summary</h2>
+
+            <strong>Adults:</strong>
+            {{ adults }}
+
+            <strong>Children:</strong>
+            {{ children }}
+
+            <strong>Total:</strong>
+            {{ total }}
+        </div>
 
     {% else %}
 

@@ -36,6 +36,13 @@ class Guest
     private $isGoing;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_child_guest", type="boolean")
+     */
+    private $isChildGuest;
+
+    /**
      * @ORM\ManyToOne(targetEntity="GuestCollective", inversedBy="guests")
      * @ORM\JoinColumn(name="collective_id", referencedColumnName="id")
      */
@@ -121,5 +128,29 @@ class Guest
     public function getCollective()
     {
         return $this->collective;
+    }
+
+    /**
+     * Set isChildGuest
+     *
+     * @param boolean $isChildGuest
+     *
+     * @return Guest
+     */
+    public function setIsChildGuest($isChildGuest)
+    {
+        $this->isChildGuest = $isChildGuest;
+
+        return $this;
+    }
+
+    /**
+     * Get isChildGuest
+     *
+     * @return boolean
+     */
+    public function getIsChildGuest()
+    {
+        return $this->isChildGuest;
     }
 }
