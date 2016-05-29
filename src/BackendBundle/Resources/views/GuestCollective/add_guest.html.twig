@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Add Guest</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Name" name="name">
+        </div>
+
+        <input type="hidden" value="1" name="sent">
+
+        <button class="btn btn-success" type="submit">Add</button>
+        <a class="btn btn-danger" href="{{ path('guest_collective_collection') }}">Finish</a>
+    </form>
+
+{% endblock %}

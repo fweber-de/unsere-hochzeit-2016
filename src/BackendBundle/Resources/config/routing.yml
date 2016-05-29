@@ -1,0 +1,36 @@
+backend_homepage:
+    path:       /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: guest_collective_collection
+        permanent: true
+
+#gc
+guest_collective_collection:
+    path:       /guests
+    defaults:   { _controller: BackendBundle:GuestCollective:collection }
+
+guest_collective_create:
+    path:       /guests/new
+    defaults:   { _controller: BackendBundle:GuestCollective:create }
+
+guest_collective_update:
+    path:       /guests/{id}/edit
+    defaults:   { _controller: BackendBundle:GuestCollective:update }
+
+guest_collective_delete:
+    path:       /guests/{id}/delete
+    defaults:   { _controller: BackendBundle:GuestCollective:delete }
+
+#guest
+guest_collective_add_guest:
+    path:       /guests/{id}/add
+    defaults:   { _controller: BackendBundle:GuestCollective:addGuest }
+
+guest_collective_guest_update:
+    path:       /guests/{id}/guest/{gid}/update
+    defaults:   { _controller: BackendBundle:GuestCollective:updateGuest }
+
+guest_collective_guest_delete:
+    path:       /guests/{id}/guest/{gid}/delete
+    defaults:   { _controller: BackendBundle:GuestCollective:deleteGuest }

@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Edit Guest Collective</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Title" value="{{ gc.title }}" name="title">
+        </div>
+
+        <input type="hidden" value="1" name="sent">
+
+        <button class="btn btn-warning" type="submit">Edit</button>
+    </form>
+
+{% endblock %}
