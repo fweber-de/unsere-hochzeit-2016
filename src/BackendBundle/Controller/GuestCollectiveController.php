@@ -14,7 +14,7 @@ class GuestCollectiveController extends Controller
 {
     public function collectionAction()
     {
-        $guests = $this->getDoctrine()->getRepository('AppBundle:GuestCollective')->findAll();
+        $guests = $this->getDoctrine()->getRepository('AppBundle:GuestCollective')->findBy([], ['isConfirmed' => 'desc']);
 
         return $this->render('BackendBundle:GuestCollective:collection.html.twig', [
             'guests' => $guests,
