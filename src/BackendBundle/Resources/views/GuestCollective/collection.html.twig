@@ -13,6 +13,7 @@
         {% set adults = 0 %}
         {% set children = 0 %}
         {% set total = 0 %}
+        {% set total_total = 0 %}
 
         <table class="table">
             {% for gc in guests %}
@@ -68,6 +69,8 @@
 
                         {% set total = total + 1 %}
                     {% endif %}
+
+                    {% set total_total = total_total + 1 %}
                 {% endfor %}
 
                 {% if gc.comment|length > 0 %}
@@ -85,13 +88,18 @@
             <h2>Summary</h2>
 
             <strong>Adults:</strong>
-            {{ adults }}
+            <span class="badge">{{ adults }}</span>
 
             <strong>Children:</strong>
-            {{ children }}
+            <span class="badge">{{ children }}</span>
 
             <strong>Total:</strong>
-            {{ total }}
+            <span class="badge">{{ total }}</span>
+
+            <span class="pull-right">
+                <strong>Eingeladen:</strong>
+                <span class="badge">{{ total_total }}</span>
+            </span>
         </div>
 
     {% else %}
