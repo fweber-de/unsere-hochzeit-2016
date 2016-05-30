@@ -28,10 +28,6 @@ class PageController extends Controller
             throw new \Exception('not found');
         }
 
-        if($gc->getIsConfirmed() == true) {
-            throw new \Exception('already confirmed');
-        }
-
         return $this->render('Page/access.html.twig', [
             'gc' => $gc,
         ]);
