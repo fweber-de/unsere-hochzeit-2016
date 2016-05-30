@@ -36,28 +36,36 @@
         <div class="col-sm-6">
 
             <h1>Hallo, {{ gc.title }}!</h1>
+            
+            {% if gc.isConfirmed == false %}
 
-            <h3>Geladene Gäste</h3>
-
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Zusage</th>
-                </tr>
-                {% for g in gc.guests %}
+                <h3>Geladene Gäste</h3>
+    
+                <table class="table">
                     <tr>
-                        <td>{{ g.name }}</td>
-                        <td><input class="accept-checkbox" type="checkbox" data-id="{{ g.id }}" checked></td>
+                        <th>Name</th>
+                        <th>Zusage</th>
                     </tr>
-                {% endfor %}
-            </table>
-
-            <div class="form-group">
-                <label for="input-comment">Anmerkungen</label>
-                <textarea class="form-control" id="input-comment" rows="8"></textarea>
-            </div>
-
-            <button class="btn btn-primary btn-block" id="submit">Zusage absenden</button>
+                    {% for g in gc.guests %}
+                        <tr>
+                            <td>{{ g.name }}</td>
+                            <td><input class="accept-checkbox" type="checkbox" data-id="{{ g.id }}" checked></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+    
+                <div class="form-group">
+                    <label for="input-comment">Anmerkungen</label>
+                    <textarea class="form-control" id="input-comment" rows="8"></textarea>
+                </div>
+    
+                <button class="btn btn-primary btn-block" id="submit">Zusage absenden</button>
+                
+            {% else %}
+            
+                <div class="alert alert-warning">Schon bestätigt! :)</div>
+            
+            {% endif %}
 
         </div>
     </div>
